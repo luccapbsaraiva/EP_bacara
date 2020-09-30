@@ -55,18 +55,21 @@ while jogo_valido:
          print("A mão da banca é: {0} e {1}".format(tipo_de_carta(carta_banca_1), tipo_de_carta(carta_banca_2)))
          print ('soma do jogador: {0}'. format(soma_jogador))
          print ('soma da banca: {0}'. format(soma_banca))
+         xyz = input("Pressione enter para continuar. ")
 
          #Quando precisa de uma terceira carta
          if soma_jogador <= 5 and soma_banca != 9:
              carta_jogador_3 = random.choice(cartas)
              del(cartas[carta_jogador_3])
              soma_jogador += carta_jogador_3
-             print ('nova soma jogador {0}'. format(soma_jogador))
+             print("Sua nova carta é: {0}".format(tipo_de_carta(carta_jogador_3)))
+             print ('nova soma do jogador {0}'. format(soma_jogador))
          if soma_banca <= 5 and soma_jogador != 9:
              carta_banca_3 = random.choice(cartas)
              del(cartas[carta_banca_3])
              soma_banca += carta_banca_3
-             print ('nova soma banca {0}'. format(soma_banca))
+             print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
+             print ('nova soma da banca {0}'. format(soma_banca))
 
          #Para valores que ultrapassem nove
          if 10<= soma_jogador < 20:
@@ -97,4 +100,6 @@ while jogo_valido:
                  dinheiro += 8 * aposta
              else:
                  dinheiro -= aposta
-         print ('Voce esta com {0}'. format(dinheiro))
+         print ('Voce esta com {0} fichas'. format(dinheiro))
+     print("Suas fichas acabaram.")
+     jogo_valido = False    
