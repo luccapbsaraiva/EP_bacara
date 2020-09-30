@@ -2,6 +2,29 @@ import random
 import math
 jogo_valido = True
 dinheiro = 100
+def tipo_de_carta(carta):
+    cartas_altas = ["Dez", "Valete", "Dama", "Rei"]
+    if carta == 1:
+        tipo = "Ás"
+    elif carta == 2:
+        tipo = "Dois"
+    elif carta == 3:
+        tipo = "Tres"
+    elif carta == 4:
+        tipo = "Quatro"
+    elif carta == 5:
+        tipo = "Cinco"
+    elif carta == 6:
+        tipo = "Seis"
+    elif carta == 7:
+        tipo = "Sete"
+    elif carta == 8:
+        tipo = "Oito"
+    elif carta == 9:
+        tipo = "Nove"
+    else:
+        tipo = random.choice(cartas_altas)
+    return tipo
 while jogo_valido:
      while dinheiro > 0:  # O jogo só ocorrerá enquanto o jogador tiver dinheiro
          aposta = int(input("Qual a quantia que deseja apostar?: "))
@@ -28,6 +51,8 @@ while jogo_valido:
              soma_jogador -= 10
          if soma_banca >= 10:
              soma_banca -= 10
+         print("Sua mão é: {0} e {1}".format(tipo_de_carta(carta_jogador_1), tipo_de_carta(carta_jogador_2)))
+         print("A mão da banca é: {0} e {1}".format(tipo_de_carta(carta_banca_1), tipo_de_carta(carta_banca_2)))
          print ('soma do jogador: {0}'. format(soma_jogador))
          print ('soma da banca: {0}'. format(soma_banca))
 
