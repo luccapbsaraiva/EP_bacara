@@ -62,25 +62,22 @@ while jogo_valido:
              carta_jogador_3 = random.choice(cartas)
              del(cartas[carta_jogador_3])
              soma_jogador += carta_jogador_3
+             #Para valores que ultrapassem nove 
+             if 10<= soma_jogador:
+             soma_jogador = (soma_jogador - 10)
              print("Sua nova carta é: {0}".format(tipo_de_carta(carta_jogador_3)))
              print ('nova soma do jogador {0}'. format(soma_jogador))
          if soma_banca <= 5 and soma_jogador != 9:
              carta_banca_3 = random.choice(cartas)
              del(cartas[carta_banca_3])
              soma_banca += carta_banca_3
+             #Para valores que ultrapassem nove
+             if 10<= soma_banca:
+             soma_jogador = (soma_banca - 10)
              print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
              print ('nova soma da banca {0}'. format(soma_banca))
 
-         #Para valores que ultrapassem nove
-         if 10<= soma_jogador < 20:
-             soma_jogador = (soma_jogador - 10)
-         elif soma_jogador >= 20:
-             soma_jogador = (soma_jogador-20) 
-         if 10<= soma_banca < 20:
-             soma_jogador = (soma_banca - 10)
-         elif soma_banca >= 20:
-             soma_banca = (soma_banca-20) 
-             
+       
          #O vencedor da partida e pagamento
          if soma_jogador > soma_banca:
              vencedor= 'Jogador'
