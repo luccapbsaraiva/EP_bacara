@@ -64,7 +64,7 @@ while jogo_valido:
              soma_jogador += carta_jogador_3
              #Para valores que ultrapassem nove 
              if 10<= soma_jogador:
-             soma_jogador = (soma_jogador - 10)
+                soma_jogador -= 10
              print("Sua nova carta é: {0}".format(tipo_de_carta(carta_jogador_3)))
              print ('nova soma do jogador {0}'. format(soma_jogador))
          if soma_banca <= 5 and soma_jogador != 9:
@@ -73,10 +73,9 @@ while jogo_valido:
              soma_banca += carta_banca_3
              #Para valores que ultrapassem nove
              if 10<= soma_banca:
-             soma_jogador = (soma_banca - 10)
+                soma_jogador -= 10
              print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
              print ('nova soma da banca {0}'. format(soma_banca))
-
        
          #O vencedor da partida e pagamento
          if soma_jogador > soma_banca:
