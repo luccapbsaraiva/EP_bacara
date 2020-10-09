@@ -25,6 +25,7 @@ def tipo_de_carta(carta):
     else:
         tipo = random.choice(cartas_altas)
     return tipo
+print('Você tem {0} fichas'.format(dinheiro))
 while jogo_valido:
      while dinheiro > 0:  # O jogo só ocorrerá enquanto o jogador tiver dinheiro
          aposta = int(input("Qual a quantia que deseja apostar?: "))
@@ -34,7 +35,9 @@ while jogo_valido:
          else:
              pass
          quem_ganha = str(input("Quem você acha que vai ganhar: Jogador, Banca ou Empate?: "))   
-
+         if quem_ganha not in ['Jogador', 'jogador', 'Banca', 'banca', 'Empate', 'empate']:
+             print('Não é possível apostar nesse resultado')
+             quem_ganha = str(input("Quem você acha que vai ganhar: Jogador, Banca ou Empate?: "))
          #Cartas do baralho
          cartas = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
          carta_jogador_1 = random.choice(cartas)
@@ -66,33 +69,33 @@ while jogo_valido:
              if 10<= soma_jogador:
                 soma_jogador -= 10
              print("Sua nova carta é: {0}".format(tipo_de_carta(carta_jogador_3)))
-             print ('nova soma do jogador {0}'. format(soma_jogador))
+             print ('nova soma do jogador é {0}'. format(soma_jogador))
          if soma_banca <= 5 and soma_jogador != 9:
              carta_banca_3 = random.choice(cartas)
              del(cartas[carta_banca_3])
              soma_banca += carta_banca_3
              #Para valores que ultrapassem nove
              if 10<= soma_banca:
-                soma_jogador -= 10
+                soma_banca -= 10
              print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
-             print ('nova soma da banca {0}'. format(soma_banca))
+             print ('nova soma da banca é {0}'. format(soma_banca))
        
          #O vencedor da partida e pagamento
          if soma_jogador > soma_banca:
-             vencedor= 'Jogador'
-             if vencedor == quem_ganha:
+             vencedor= ['Jogador', 'jogador']
+             if quem_ganha in vencedor:
                  dinheiro += aposta
              else:
                  dinheiro -= aposta
          elif soma_jogador < soma_banca:
-             vencedor = 'Banca'
-             if vencedor == quem_ganha:
+             vencedor = ['Banca', 'banca']
+             if quem_ganha in vencedor:
                  dinheiro += 0.95*aposta
              else: 
                  dinheiro -= aposta
          else: 
-             vencedor = 'Empate'
-             if vencedor == quem_ganha:
+             vencedor = ['Empate', 'empate']
+             if quem_ganha in vencedor:
                  dinheiro += 8 * aposta
              else:
                  dinheiro -= aposta
