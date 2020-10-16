@@ -1,7 +1,7 @@
 import random
 import math
 jogo_valido = True
-dinheiro = 100
+dinheiro = 10000
 def tipo_de_carta(carta):
     cartas_altas = ["Dez", "Valete", "Dama", "Rei"]
     if carta == 1:
@@ -78,27 +78,27 @@ while jogo_valido:
              if 10<= soma_banca:
                 soma_banca -= 10
              print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
-             print ('nova soma da banca é {0}'. format(soma_banca))
+             print ('nova soma da banca é {0}'.format(soma_banca))
        
          #O vencedor da partida e pagamento
          if soma_jogador > soma_banca:
              vencedor= ['Jogador', 'jogador']
              if quem_ganha in vencedor:
-                 dinheiro += aposta
+                 dinheiro += aposta - (0.0129*aposta)
              else:
                  dinheiro -= aposta
          elif soma_jogador < soma_banca:
              vencedor = ['Banca', 'banca']
              if quem_ganha in vencedor:
-                 dinheiro += 0.95*aposta
+                 dinheiro += (0.95*aposta) - 0.0101*(0.95*aposta)
              else: 
                  dinheiro -= aposta
          else: 
              vencedor = ['Empate', 'empate']
              if quem_ganha in vencedor:
-                 dinheiro += 8 * aposta
+                 dinheiro += 8 * aposta - 0.1575*(8*aposta)
              else:
                  dinheiro -= aposta
-         print ('Voce esta com {0} fichas'. format(dinheiro))
+         print ('Voce esta com {0} fichas'.format(dinheiro))
      print("Suas fichas acabaram.")
      jogo_valido = False    
