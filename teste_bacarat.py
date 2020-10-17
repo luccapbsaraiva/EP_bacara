@@ -26,6 +26,9 @@ def tipo_de_carta(carta):
         tipo = random.choice(cartas_altas)
     return tipo
 numero_jogadores = int(input('Quantos jogadores irão jogar: 1 ou 2?: '))
+while numero_jogadores > 2 or numero_jogadores < 1:
+    print('O jogo só pode ser jogado por 1 ou 2 jogadores, escolha novamente.')
+    numero_jogadores = int(input('Quantos jogadores irão jogar: 1 ou 2?: '))
 if numero_jogadores == 2:
     dinheiro = 10000
     dinheiro_2 = 10000
@@ -56,14 +59,14 @@ while jogo_valido:
 
     elif numero_jogadores == 1:
         if dinheiro > 0:
-            aposta = int(input("Qual a quantia que o jogador 1 deseja apostar?: "))
+            aposta = int(input("Qual a quantia que você deseja apostar?: "))
             if aposta > dinheiro: #Não deixar o jogador apostar mais do que tem
                 print("Aposta excede suas fichas disponíveis.")
                 aposta = int(input("Qual a quantia que deseja apostar?: "))
-            quem_ganha = str(input("Quem o jogador 1 acha que vai ganhar: Jogador, Banca ou Empate?: "))
+            quem_ganha = str(input("Quem você acha que vai ganhar: Jogador, Banca ou Empate?: "))
             if quem_ganha not in ['Jogador', 'jogador', 'Banca', 'banca', 'Empate', 'empate']:
                 print('jogador 1, não é possível apostar nesse resultado')
-                quem_ganha = str(input("Quem o jogador 1 acha que vai ganhar: Jogador, Banca ou Empate?: "))
+                quem_ganha = str(input("Quem você acha que vai ganhar: Jogador, Banca ou Empate?: "))
          #Cartas do baralho
     cartas = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]*8
     carta_jogador_1 = random.choice(cartas)
@@ -102,50 +105,110 @@ while jogo_valido:
             carta_banca_3 = random.choice(cartas)
             del(cartas[carta_banca_3])
             soma_banca += carta_banca_3
+            print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
+            print ('nova soma da banca é {0}'.format(soma_banca))
         elif carta_3j == True:
             if soma_banca == 0 or soma_banca==1 or soma_banca==2:
                 carta_banca_3 = random.choice(cartas)
                 del(cartas[carta_banca_3])
                 soma_banca += carta_banca_3
+                print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
+                print ('nova soma da banca é {0}'.format(soma_banca))
             elif soma_banca==3 and carta_jogador_3 != 8:
                 carta_banca_3 = random.choice(cartas)
                 del(cartas[carta_banca_3])
                 soma_banca += carta_banca_3
+                print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
+                print ('nova soma da banca é {0}'.format(soma_banca))
             elif soma_banca ==4 and (carta_jogador_3 != 0 and carta_jogador_3 != 1 and carta_jogador_3 != 8 and carta_jogador_3 != 9):
                 carta_banca_3 = random.choice(cartas)
                 del(cartas[carta_banca_3])
                 soma_banca += carta_banca_3
+                print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
+                print ('nova soma da banca é {0}'.format(soma_banca))
             elif soma_banca ==5 and (carta_jogador_3 == 4 and carta_jogador_3 == 5 and carta_jogador_3 == 6 and carta_jogador_3 == 7):
                 carta_banca_3 = random.choice(cartas)
                 del(cartas[carta_banca_3])
                 soma_banca += carta_banca_3
+                print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
+                print ('nova soma da banca é {0}'.format(soma_banca))
             else: 
                 pass
             #Para valores que ultrapassem nove
         if 10<= soma_banca:
             soma_banca -= 10
-        print("A nova carta da banca é: {0}".format(tipo_de_carta(carta_banca_3)))
-        print ('nova soma da banca é {0}'.format(soma_banca))
+            
     
-    #O vencedor da partida e pagamento
-    if soma_jogador > soma_banca:
-        vencedor= ['Jogador', 'jogador']
-        if quem_ganha in vencedor:
-            dinheiro += aposta - (0.0124*aposta)
-        else:
-            dinheiro -= aposta
-    elif soma_jogador < soma_banca:
-        vencedor = ['Banca', 'banca']
-        if quem_ganha in vencedor:
-            dinheiro += (0.95*aposta) - 0.0106*(0.95*aposta)
+    #O vencedor da partida e pagamento para o jogo de 1 jogador
+    if numero_jogadores == 1:
+        if soma_jogador > soma_banca:
+            vencedor= ['Jogador', 'jogador']
+            if quem_ganha in vencedor:
+                dinheiro += aposta - (0.0124*aposta)
+            else:
+                dinheiro -= aposta
+        elif soma_jogador < soma_banca:
+            vencedor = ['Banca', 'banca']
+            if quem_ganha in vencedor:
+                dinheiro += (0.95*aposta) - 0.0106*(0.95*aposta)
+            else: 
+                dinheiro -= aposta
         else: 
-            dinheiro -= aposta
-    else: 
-        vencedor = ['Empate', 'empate']
-        if quem_ganha in vencedor:
-            dinheiro += 8 * aposta - 0.1436*(8*aposta)
-        else:
-            dinheiro -= aposta
-    print ('Voce esta com {0} fichas'.format(dinheiro))
+            vencedor = ['Empate', 'empate']
+            if quem_ganha in vencedor:
+                dinheiro += 8 * aposta - 0.1436*(8*aposta)
+            else:
+                dinheiro -= aposta
+    #O vencedor da partida e pagamento para o jogo de 2 jogador
+    elif numero_jogadores == 2:
+        if soma_jogador > soma_banca:
+            vencedor= ['Jogador', 'jogador']
+            if quem_ganha in vencedor and quem_ganha_2 in vencedor:
+                dinheiro += aposta - (0.0124*aposta)
+                dinheiro_2 += aposta_2 - (0.0124*aposta_2)
+            elif quem_ganha in vencedor and quem_ganha_2 not in vencedor:
+                dinheiro += aposta - (0.0124*aposta)
+                dinheiro_2 -= aposta_2
+            elif quem_ganha not in vencedor and quem_ganha_2 in vencedor:
+                dinheiro -= aposta
+                dinheiro_2 += aposta_2 - (0.0124*aposta_2)
+            else:
+                dinheiro -= aposta
+                dinheiro_2 -= aposta_2
+        elif soma_jogador < soma_banca:
+            vencedor = ['Banca', 'banca']
+            if quem_ganha in vencedor and quem_ganha_2 in vencedor:
+                dinheiro += (0.95*aposta) - 0.0106*(0.95*aposta)
+                dinheiro_2 += (0.95*aposta_2) - 0.0106*(0.95*aposta_2)
+            elif quem_ganha in vencedor and quem_ganha_2 not in vencedor: 
+                dinheiro += (0.95*aposta) - 0.0106*(0.95*aposta)
+                dinheiro_2 -= aposta_2
+            elif quem_ganha not in vencedor and quem_ganha_2 in vencedor:
+                dinheiro -= aposta
+                dinheiro_2 += (0.95*aposta_2) - 0.0106*(0.95*aposta_2)
+            else:
+                dinheiro -= aposta
+                dinheiro_2 -= aposta_2
+        else: 
+            vencedor = ['Empate', 'empate']
+            if quem_ganha in vencedor and quem_ganha_2 in vencedor:
+                dinheiro += 8 * aposta - 0.1436*(8*aposta)
+                dinheiro_2 += 8 * aposta_2 - 0.1436*(8*aposta_2)
+            elif quem_ganha in vencedor and quem_ganha_2 not in vencedor:
+                dinheiro += 8 * aposta - 0.1436*(8*aposta)
+                dinheiro_2 -= aposta_2
+            elif quem_ganha not in vencedor and quem_ganha_2 in vencedor:
+                dinheiro -= aposta
+                dinheiro_2 += 8 * aposta_2 - 0.1436*(8*aposta_2)
+            else:
+                dinheiro -= aposta
+                dinheiro_2 -= aposta_2
+
+    if numero_jogadores == 1:
+        print ('Voce esta com {0} fichas'.format(int(dinheiro)))
+    elif numero_jogadores == 2:
+        print ('O jogador 1 esta com {0} fichas'.format(int(dinheiro)))
+        print ('O jogador 2 esta com {0} fichas'.format(int(dinheiro_2)))
+
 print("Suas fichas acabaram.")
 jogo_valido = False    
