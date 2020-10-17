@@ -39,7 +39,7 @@ while jogo_valido:
              print('Não é possível apostar nesse resultado')
              quem_ganha = str(input("Quem você acha que vai ganhar: Jogador, Banca ou Empate?: "))
          #Cartas do baralho
-         cartas = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+         cartas = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]*8
          carta_jogador_1 = random.choice(cartas)
          del(cartas[carta_jogador_1])
          carta_jogador_2 = random.choice(cartas)
@@ -70,10 +70,25 @@ while jogo_valido:
                 soma_jogador -= 10
              print("Sua nova carta é: {0}".format(tipo_de_carta(carta_jogador_3)))
              print ('nova soma do jogador é {0}'. format(soma_jogador))
-         if soma_banca <= 5 and soma_jogador != 9:
-             carta_banca_3 = random.choice(cartas)
-             del(cartas[carta_banca_3])
-             soma_banca += carta_banca_3
+          if soma_banca <= 5 and soma_jogador != 9:
+             if soma_banca == 0 or soma_banca==1 or soma_banca==2:
+                carta_banca_3 = random.choice(cartas)
+                del(cartas[carta_banca_3])
+                soma_banca += carta_banca_3
+             elif soma_banca==3 and carta_jogador_3 != 8:
+                carta_banca_3 = random.choice(cartas)
+                del(cartas[carta_banca_3])
+                soma_banca += carta_banca_3
+             elif soma_banca ==4 and (carta_jogador_3 != 0 and carta_jogador_3 != 1 and carta_jogador_3 != 8 and carta_jogador_3 != 9):
+                carta_banca_3 = random.choice(cartas)
+                del(cartas[carta_banca_3])
+                soma_banca += carta_banca_3
+             elif soma_banca ==5 and (carta_jogador_3 == 4 and carta_jogador_3 == 5 and carta_jogador_3 == 6 and carta_jogador_3 == 7):
+                carta_banca_3 = random.choice(cartas)
+                del(cartas[carta_banca_3])
+                soma_banca += carta_banca_3
+             else: 
+                 pass
              #Para valores que ultrapassem nove
              if 10<= soma_banca:
                 soma_banca -= 10
@@ -84,19 +99,19 @@ while jogo_valido:
          if soma_jogador > soma_banca:
              vencedor= ['Jogador', 'jogador']
              if quem_ganha in vencedor:
-                 dinheiro += aposta - (0.0129*aposta)
+                 dinheiro += aposta - (0.0124*aposta)
              else:
                  dinheiro -= aposta
          elif soma_jogador < soma_banca:
              vencedor = ['Banca', 'banca']
              if quem_ganha in vencedor:
-                 dinheiro += (0.95*aposta) - 0.0101*(0.95*aposta)
+                 dinheiro += (0.95*aposta) - 0.0106*(0.95*aposta)
              else: 
                  dinheiro -= aposta
          else: 
              vencedor = ['Empate', 'empate']
              if quem_ganha in vencedor:
-                 dinheiro += 8 * aposta - 0.1575*(8*aposta)
+                 dinheiro += 8 * aposta - 0.1436*(8*aposta)
              else:
                  dinheiro -= aposta
          print ('Voce esta com {0} fichas'.format(dinheiro))
