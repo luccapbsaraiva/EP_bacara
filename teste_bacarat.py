@@ -36,7 +36,7 @@ if numero_jogadores == 2:
     print('O jogador 2 tem {0} fichas'.format(dinheiro_2))
 elif numero_jogadores == 1:
     dinheiro = 10000
-    print('O jogador 1 tem {0} fichas'.format(dinheiro))
+    print('O jogador tem {0} fichas'.format(dinheiro))
 while jogo_valido:
     if numero_jogadores == 2:
         if dinheiro > 0 or dinheiro_2 > 0:  # O jogo só ocorrerá enquanto um dos jogadores tiver dinheiro
@@ -65,7 +65,7 @@ while jogo_valido:
                 aposta = int(input("Qual a quantia que deseja apostar?: "))
             quem_ganha = str(input("Quem você acha que vai ganhar: Jogador, Banca ou Empate?: "))
             if quem_ganha not in ['Jogador', 'jogador', 'Banca', 'banca', 'Empate', 'empate']:
-                print('jogador 1, não é possível apostar nesse resultado')
+                print('jogador, não é possível apostar nesse resultado')
                 quem_ganha = str(input("Quem você acha que vai ganhar: Jogador, Banca ou Empate?: "))
          #Cartas do baralho
     cartas = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]*8
@@ -209,6 +209,25 @@ while jogo_valido:
     elif numero_jogadores == 2:
         print ('O jogador 1 esta com {0} fichas'.format(int(dinheiro)))
         print ('O jogador 2 esta com {0} fichas'.format(int(dinheiro_2)))
+    
+    #Fim da partida
+    if numero_jogadores==1 and dinheiro <= 0:
+        jogo_valido=False
+        break
+    #Se um dos jogadores ficar sem fichas
+    elif numero_jogadores==2 and (dinheiro<=0 or dinheiro_2<=0):
+        numero_jogadores=1 
+        dineheiro = dinheiro + dinheiro_2
+        if dinheiro<=0:
+            print ("jogador 1, suas fichas acabaram")
+            print ("jogador 2, você é o único jogador agora")
+        elif dinheiro_2==0:
+            print("jogador 2, suas fichas acabaram")
+            print ("jogador 1, você é o único jogador agora")
+        #Se os dois jagores ficarem sem fichas ao na mesma rodada
+        elif dinheiro<=0 and dinheiro_2<=0:
+            jogo_valido=False
+            break
 
 print("Suas fichas acabaram.")
-jogo_valido = False    
+print ("O jogo acabou")
