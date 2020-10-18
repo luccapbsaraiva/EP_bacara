@@ -1,3 +1,6 @@
+# EP - Design de Software
+# Equipe: Alice Azevedo Longman e Lucca de Paiva Barroso Saraiva
+# 18/10/2020
 import random
 import math
 jogo_valido = True
@@ -215,19 +218,20 @@ while jogo_valido:
         jogo_valido=False
         break
     #Se um dos jogadores ficar sem fichas
-    elif numero_jogadores==2 and (dinheiro<=0 or dinheiro_2<=0):
+    if dinheiro<=0:
+        print ("jogador 1, suas fichas acabaram")
+        print ("jogador 2, você é o único jogador agora")
         numero_jogadores=1 
-        dineheiro = dinheiro + dinheiro_2
-        if dinheiro<=0:
-            print ("jogador 1, suas fichas acabaram")
-            print ("jogador 2, você é o único jogador agora")
-        elif dinheiro_2==0:
-            print("jogador 2, suas fichas acabaram")
-            print ("jogador 1, você é o único jogador agora")
-        #Se os dois jagores ficarem sem fichas ao na mesma rodada
-        elif dinheiro<=0 and dinheiro_2<=0:
-            jogo_valido=False
-            break
+        dinheiro = dinheiro + dinheiro_2
+    elif dinheiro_2<=0:
+        print("jogador 2, suas fichas acabaram")
+        print ("jogador 1, você é o único jogador agora")
+        numero_jogadores=1 
+        dinheiro = dinheiro + dinheiro_2
+    #Se os dois jagores ficarem sem fichas na mesma rodada
+    elif dinheiro<=0 and dinheiro_2<=0:
+        jogo_valido=False
+        break
 
 print("Suas fichas acabaram.")
 print ("O jogo acabou")
